@@ -4,7 +4,7 @@
 #include "Interface.h"
 
 int main(){
-    Interface i(800, 600);
+    Interface i(800, 800);
     i.Init();
     i.run();
     i.Close();

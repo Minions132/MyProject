@@ -323,3 +323,23 @@ void HuffmanTree::Count_Code(){
 bool HuffmanTree::Get_state() const{
     return tree_generated;
 }
+
+std::string HuffmanTree::find(char c){
+    this->Count_Code();
+    std::queue<TreeNode*> q;
+    q.push(root);
+    while(!q.empty()){
+        if(q.front()->data == c){
+            return q.front()->code;
+        }
+        if(q.front()->lchild){
+            q.push(q.front()->lchild);
+        }
+        if(q.front()->rchild){
+            q.push(q.front()->rchild);
+        }
+        q.pop();
+    }
+    std::string s = "";
+    return s;
+}

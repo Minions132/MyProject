@@ -32,5 +32,6 @@ public:
     void Vertical_output();
     void Count_Code();
     bool Get_state() const;
+    std::string find(char c);
 };
 

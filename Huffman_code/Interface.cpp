@@ -147,6 +147,18 @@ void Interface::Init(){
     outtextxy(x_title - 75, y_title, title_7.c_str());
     getimage(page_error_output_9, 0, 0, width, height);
     Add_page(page_error_output_9);
+    IMAGE* page_find_10 = new IMAGE(width, height);
+    solidrectangle(0, 0, width, height);
+    std::string title_10 = "Input examples:A";
+    outtextxy(x_title + 25, y_title, title_10.c_str());
+    getimage(page_find_10, 0, 0, width, height);
+    Add_page(page_find_10);
+    IMAGE* page_find_error_11 = new IMAGE(width, height);
+    solidrectangle(0, 0, width, height);
+    std::string title_11 = "ERROR! HUFFMANTREE DOES NOT EXIST!";
+    outtextxy(x_title - 75, y_title, title_7.c_str());
+    getimage(page_find_error_11, 0, 0, width, height);
+    Add_page(page_find_error_11);
     Button* bt_1 = new Button(X, Y, 200, 50, "Build Huffman Tree", [&](){setCurrentIndex(1);});
     Button* input_cin = new Button(X, Y, 200, 50, "Input from keyboard", [&](){setCurrentIndex(5);});
     Button* bt_cin_confirm = new Button(X, Y + delta_Y, 200, 50, "Confirm", [&](){
@@ -210,10 +222,28 @@ void Interface::Init(){
     });
     Button* bt_output_error = new Button(X, Y + delta_Y, 200, 50, "Back", [&](){setCurrentIndex(0);});
     Button* bt_4_back = new Button(X, Y, 200, 50, "Back", [&](){setCurrentIndex(0);});
+    Button* bt_5_find = new Button(X, Y + delta_Y * 4, 200, 50, "Find", [&](){
+        if(tree->Get_state()){
+            setCurrentIndex(10);
+        }
+        else{
+            setCurrentIndex(11);
+        }
+    });
+    Button* bt_find_confirm = new Button(X, Y + delta_Y, 200, 50, "Confirm", [&](){
+        std::string data = textboxes[10][0]->GetText();
+        textboxes[10][0]->clear();
+        char c = data[0];
+        std::string code = tree->find(c);
+        HWND hwnd = GetHWnd();
+        if(MessageBox(hwnd, code.c_str(), "Info", MB_OK)){}
+    });
+    Button* bt_find_back = new Button(X, Y + delta_Y * 2, 200, 50, "Back", [&](){setCurrentIndex(0);});
     Add_Button(bt_1, 0);
     Add_Button(bt_2, 0);
     Add_Button(bt_3, 0);
     Add_Button(bt_4, 0);
+    Add_Button(bt_5_find, 0);
     Add_Button(bt_1_back, 1);
     Add_Button(input_cin, 1);
     Add_Button(input_fin, 1);
@@ -229,14 +259,19 @@ void Interface::Init(){
     Add_Button(bt_code_error, 7);
     Add_Button(bt_decode_error, 8);
     Add_Button(bt_output_error, 9);
+    Add_Button(bt_find_confirm, 10);
+    Add_Button(bt_find_back, 10);
+    Add_Button(bt_find_back, 11);
     TextBox* tb_5_0 = new TextBox(X, Y, 200, 30, 50);
     TextBox* tb_6_0 = new TextBox(X, Y, 200, 30, 50);
     TextBox* tb_2_0 = new TextBox(X, Y, 200, 30, 50);
     TextBox* tb_3_0 = new TextBox(X, Y, 200, 30, 50);
+    TextBox* tb_10_0 = new TextBox(X, Y, 200, 30, 50);
     Add_TextBox(tb_5_0, 5);
     Add_TextBox(tb_6_0, 6);
     Add_TextBox(tb_2_0, 2);
     Add_TextBox(tb_3_0, 3);
+    Add_TextBox(tb_10_0, 10);
     setCurrentIndex(0);
 }
 
